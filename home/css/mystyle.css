@@ -1,11 +1,38 @@
 body {
-    background-color: lightblue;
+    background-color: #e2caff;
+    background-image: linear-gradient(to bottom, #e2caff, #bb86fd);
   }
   h1 {
-    color: white;
     text-align: center;
+    background: #6a3fa0;
+    color: #e2caff;
+    font-size: 40px;
+    padding: 40px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  h2 {
+  	border-top: 6px solid black;
+  	border-top-width: thin;
+  	padding: 15px;
+  	border-left-radius: 30px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    margin-left: 15px;
   }
   p {
     font-family: verdana;
     font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 50px;
   }
+  ul li {
+    list-style-type: square;
+    margin-top: 10px;
+    margin-left: 30px;
+  }
+  li {
+    font-family: verdana;
+    font-size: 20px;
+  }  
