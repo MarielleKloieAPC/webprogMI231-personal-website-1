@@ -4,10 +4,7 @@
 
   <div class="section section1">
     <div class="center-image">
-      <img
-        src="https://github.com/MarielleKloieAPC/webprogMI231-personal-website-1/blob/feature/website_finals/home/images/port_pic.png?raw=true"
-        alt="Your Image Here"
-      />
+      <img src="/images/port_pic.png" alt="Your Image Here" />
     </div>
   </div>
 
@@ -29,19 +26,17 @@
     <div class="menu-container" :class="{ open: isMenuOpen }">
       <div class="menu-button" @click="toggleMenu"></div>
       <div class="menu-items">
-        <a href="index.html" class="menu-item">🏠</a>
-        <a href="edu_exp.html" class="menu-item">🎓</a>
-        <a href="interest.html" class="menu-item">❤️</a>
-        <a href="gallery.html" class="menu-item">🖼️</a>
-        <a href="guestbook.html" class="menu-item">📝</a>
+        <router-link to="/" class="menu-item">🏠</router-link>
+        <router-link to="/edu_exp" class="menu-item">🎓</router-link>
+        <router-link to="/interest" class="menu-item">❤️</router-link>
+        <router-link to="/gallery" class="menu-item">🖼️</router-link>
+        <router-link to="/guestbook" class="menu-item">📝</router-link>
       </div>
     </div>
   </div>
 </template>
 
-<script></script>
-
-<script setup>
+<script>
 export default {
   data() {
     return {
@@ -81,14 +76,13 @@ export default {
   },
   provide() {
     return {
-      isSection2Triggered: this.isSection2Triggered
-    }
-  }
+      isSection2Triggered: this.isSection2Triggered,
+    };
+  },
 };
 </script>
 
 <style>
-
 
 body {
     margin: 0;
@@ -194,13 +188,13 @@ li {
 
 /* First Background */
 .background1 {
-    background-image: url('https://github.com/MarielleKloieAPC/webprogMI231-personal-website-1/blob/feature/website_finals/home/images/Home1.png?raw=true');
+    background-image: url('/images/Home1.png');
     
 }
 
 /* Second Background */
 .background2 {
-    background-image: url('https://github.com/MarielleKloieAPC/webprogMI231-personal-website-1/blob/feature/website_finals/home/images/Home2.png?raw=true');
+    background-image: url('/images/Home2.png');
     
 }
 
