@@ -249,8 +249,8 @@ li {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
   display: flex;
-  align-items: center; /* Vertical alignment */
-  justify-content: center; /* Horizontal alignment */
+  align-items: center;
+  justify-content: center; 
   padding: 0 10px;
 }
 
