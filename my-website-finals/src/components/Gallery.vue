@@ -16,13 +16,13 @@
 
     <div class="menu-container" :class="{ open: isMenuOpen }">
       <div class="menu-button" @click="toggleMenu"></div>
-      <div class="menu-items">
-        <a href="index.html" class="menu-item">🏠</a>
-        <a href="edu_exp.html" class="menu-item">🎓</a>
-        <a href="interest.html" class="menu-item">❤️</a>
-        <a href="gallery.html" class="menu-item">🖼️</a>
-        <a href="guestbook.html" class="menu-item">📝</a>
-      </div>
+        <div class="menu-items">
+          <router-link to="/" class="menu-item" title="Home">🏠</router-link>
+          <router-link to="/edu_exp" class="menu-item" title="Education & Experience">🎓</router-link>
+          <router-link to="/interest" class="menu-item" title="Interests">❤️</router-link>
+          <router-link to="/gallery" class="menu-item" title="Gallery">🖼️</router-link>
+          <router-link to="/guestbook" class="menu-item" title="Guestbook">📝</router-link>
+        </div>
     </div>
     <div class="overlay" :class="{ active: showOverlay }" @click="closeEnlarged">
       <img v-if="enlargedImage" :src="enlargedImage" class="gallery-image enlarged" />
@@ -35,24 +35,24 @@ export default {
   data() {
     return {
       images: [
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(1).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(2).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(3).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(4).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(5).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(6).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(7).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(8).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(9).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(10).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(11).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(12).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(13).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(14).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(15).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(16).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(17).jpg",
-        "https://github.com/MarielleKloieAPC/webprogMI231-personal-website-finals/raw/feature/website_finals/home/images/gallery/Image%20(18).jpg",
+        '/images/gallery/Image (1).jpg',
+        '/images/gallery/Image (2).jpg',
+        '/images/gallery/Image (3).jpg',
+        '/images/gallery/Image (4).jpg',
+        '/images/gallery/Image (5).jpg',
+        '/images/gallery/Image (6).jpg',
+        '/images/gallery/Image (7).jpg',
+        '/images/gallery/Image (8).jpg',
+        '/images/gallery/Image (9).jpg',
+        '/images/gallery/Image (10).jpg',
+        '/images/gallery/Image (11).jpg',
+        '/images/gallery/Image (12).jpg',
+        '/images/gallery/Image (13).jpg',
+        '/images/gallery/Image (14).jpg',
+        '/images/gallery/Image (15).jpg',
+        '/images/gallery/Image (16).jpg',
+        '/images/gallery/Image (17).jpg',
+        '/images/gallery/Image (18).jpg',
       ],
       isMenuOpen: false,
       enlargedImage: null,
@@ -75,67 +75,140 @@ export default {
 };
 </script>
 
+
 <style scoped>
 /* Image Styles */
 .gallery-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  margin: 5px;
-  border: 2px solid transparent;
-  object-fit: contain;
-  max-width: 300px;
-  max-height: 300px;
+width: 100%;
+height: auto;
+border-radius: 10px;
+cursor: pointer;
+transition: transform 0.3s ease;
+margin: 5px;
+border: 2px solid transparent;
+object-fit: contain;
+max-width: 300px;
+max-height: 300px;
 }
 
 .gallery-image:hover {
-  border-color: #cfc6e1;
+border-color: #cfc6e1;
 }
 
 .gallery-image.enlarged {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  max-width: 90vw;
-  max-height: 90vh;
-  width: auto;
-  height: auto;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 1000;
+max-width: 90vw;
+max-height: 90vh;
+width: auto;
+height: auto;
 }
 
-/* Modal Overlay */
+/* Modal Overlay (Optional, for background dimming when enlarged) */
 .overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 999;
-  cursor: pointer;
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 300%;
+height: 300%;
+background-color: rgba(0, 0, 0, 0.7);
+z-index: 999;
+cursor: pointer;
 }
 
 .overlay.active {
-  display: block;
+display: block;
 }
 
 /* Gallery Container */
 .gallery-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 5px;
-  margin-top: 20px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 5px;
+margin-top: 20px;
 }
 
+.menu-container {
+position: fixed;
+top: 50px;
+right: 20px;
+z-index: 20;
+transform: translateX(-50%);
+}
+
+.menu-button {
+width: 50px;
+height: 50px;
+background-color: #17153b;
+color: white;
+font-size: 30px;
+text-align: center;
+line-height: 50px;
+border-radius: 50%;
+cursor: pointer;
+transition: 0.3s;
+}
+
+.menu-button::before {
+content: "\2729";
+color: white;
+}
+
+.menu-button.active {
+transform: rotate(45deg);
+}
+
+.menu-items {
+position: absolute;
+top: 70px;
+left: 0;
+display: flex;
+flex-direction: column;
+gap: 15px;
+opacity: 0;
+transform: translateY(10px);
+pointer-events: none;
+transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.menu-container.open .menu-items {
+opacity: 1;
+transform: translateY(0);
+pointer-events: auto;
+}
+
+.menu-item {
+width: 50px;
+height: 50px;
+background-color: #17153b;
+color: white;
+font-size: 20px;
+text-align: center;
+line-height: 50px;
+border-radius: 50%;
+text-decoration: none;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+background-color: #2e295f;
+transform: scale(1.1);
+}
+</style>
+
+
+<style>
 body {
   margin: 0;
   font-family: "Baskerville", serif;
-  background: url("https://github.com/MarielleKloieAPC/webprogMI231-personal-website-1/blob/feature/website_finals/home/images/Home3.png?raw=true")
-    center/cover no-repeat;
+  background: url('/images/Home3.png') center/cover no-repeat;
   min-height: 100vh;
   color: white;
   position: relative;
@@ -146,10 +219,11 @@ body {
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
-  max-width: 1000px;
-  width: 90%;
+  max-width: 1400px; /* Increased max-width */
+  width: 250%; /* Increased width */
   margin: 20px auto;
   overflow-y: auto;
+  align-self: center;
 }
 
 section h2,
@@ -219,75 +293,5 @@ li {
   margin-top: 10px;
   font-size: 15px;
   text-align: left;
-}
-
-.menu-container {
-  position: fixed;
-  top: 50px;
-  right: 20px;
-  z-index: 20;
-  transform: translateX(-50%);
-}
-
-.menu-button {
-  width: 50px;
-  height: 50px;
-  background-color: #17153b;
-  color: white;
-  font-size: 30px;
-  text-align: center;
-  line-height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.menu-button::before {
-  content: "\2729";
-  color: white;
-}
-
-.menu-button.active {
-  transform: rotate(45deg);
-}
-
-.menu-items {
-  position: absolute;
-  top: 70px;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  opacity: 0;
-  transform: translateY(10px);
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.menu-container.open .menu-items {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.menu-item {
-  width: 50px;
-  height: 50px;
-  background-color: #17153b;
-  color: white;
-  font-size: 20px;
-  text-align: center;
-  line-height: 50px;
-  border-radius: 50%;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
-
-.menu-item:hover {
-  background-color: #2e295f;
-  transform: scale(1.1);
 }
 </style>

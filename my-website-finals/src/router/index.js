@@ -6,10 +6,10 @@ import Interest from '../components/Interest.vue';
 import Gallery from '../components/Gallery.vue';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/edu_exp', component: EduExp },
-  { path: '/interest', component: Interest },
-  { path: '/gallery', component: Gallery },
+  { path: '/', name: 'Home', component: Home },
+  { path: '/edu_exp', name: 'EduExp', component: EduExp },
+  { path: '/interest', name: 'Interest', component: Interest },
+  { path: '/gallery', name: 'Gallery', component: Gallery },
 ];
 
 const router = createRouter({
