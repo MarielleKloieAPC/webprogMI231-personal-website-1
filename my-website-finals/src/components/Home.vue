@@ -27,11 +27,11 @@
       <div class="menu-container" :class="{ open: isMenuOpen }">
         <div class="menu-button" @click="toggleMenu"></div>
         <div class="menu-items">
-          <router-link to="/" class="menu-item" title="Home">🏠</router-link>
-          <router-link to="/edu_exp" class="menu-item" title="Education & Experience">🎓</router-link>
-          <router-link to="/interest" class="menu-item" title="Interests">❤️</router-link>
-          <router-link to="/gallery" class="menu-item" title="Gallery">🖼️</router-link>
-          <router-link to="/guestbook" class="menu-item" title="Guestbook">📝</router-link>
+          <router-link to="/" class="menu-item" data-title="Home">🏠</router-link>
+          <router-link to="/edu_exp" class="menu-item" data-title="Education & Experience">🎓</router-link>
+          <router-link to="/interest" class="menu-item" data-title="Interests">❤️</router-link>
+          <router-link to="/gallery" class="menu-item" data-title="Gallery">🖼️</router-link>
+          <router-link to="/guestbook" class="menu-item" data-title="Guestbook">📝</router-link>
         </div>
       </div>
     </div>
@@ -205,6 +205,36 @@ export default {
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
+.menu-item::before {
+  content: attr(data-title);
+  position: absolute;
+  height: 30px;
+  width: auto;
+  top: 20%;
+  right: 110%;
+  transform: translateX(-5%);
+  background-color: #2e295f;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: "Baskerville", serif;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  display: flex;
+  align-items: center; /* Vertical alignment */
+  justify-content: center; /* Horizontal alignment */
+  padding: 0 10px;
+}
+
+.menu-item:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+
 .menu-item:hover {
   background-color: #2e295f;
   transform: scale(1.1);
@@ -270,7 +300,7 @@ h3 {
   padding: 5px;
   margin: 10px 0 0;
   text-align: left;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 h4 {

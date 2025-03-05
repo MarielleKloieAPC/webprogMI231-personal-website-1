@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="content">
-      <h2>Gallery</h2>
+      <h4>Gallery</h4>
       <div class="gallery-container">
         <img
           v-for="(image, index) in images"
@@ -16,12 +16,12 @@
 
     <div class="menu-container" :class="{ open: isMenuOpen }">
       <div class="menu-button" @click="toggleMenu"></div>
-        <div class="menu-items">
-          <router-link to="/" class="menu-item" title="Home">🏠</router-link>
-          <router-link to="/edu_exp" class="menu-item" title="Education & Experience">🎓</router-link>
-          <router-link to="/interest" class="menu-item" title="Interests">❤️</router-link>
-          <router-link to="/gallery" class="menu-item" title="Gallery">🖼️</router-link>
-          <router-link to="/guestbook" class="menu-item" title="Guestbook">📝</router-link>
+      <div class="menu-items">
+          <router-link to="/" class="menu-item" data-title="Home">🏠</router-link>
+          <router-link to="/edu_exp" class="menu-item" data-title="Education & Experience">🎓</router-link>
+          <router-link to="/interest" class="menu-item" data-title="Interests">❤️</router-link>
+          <router-link to="/gallery" class="menu-item" data-title="Gallery">🖼️</router-link>
+          <router-link to="/guestbook" class="menu-item" data-title="Guestbook">📝</router-link>
         </div>
     </div>
     <div class="overlay" :class="{ active: showOverlay }" @click="closeEnlarged">
@@ -82,13 +82,15 @@ export default {
 width: 100%;
 height: auto;
 border-radius: 10px;
+margin: 0; /* Remove any margin */
+padding: 0;
 cursor: pointer;
 transition: transform 0.3s ease;
 margin: 5px;
 border: 2px solid transparent;
 object-fit: contain;
-max-width: 300px;
-max-height: 300px;
+max-width: 200px;
+max-height: 200px;
 }
 
 .gallery-image:hover {
@@ -126,10 +128,12 @@ display: block;
 
 /* Gallery Container */
 .gallery-container {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-gap: 5px;
-margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns for 4 images per row */
+  gap: 5px;
+  margin-top: 20px;
+  width: 80%; /* Adjust as needed to fit 4 images */
+  margin: 20px auto; /* center the gallery container */
 }
 
 .menu-container {
@@ -197,6 +201,35 @@ align-items: center;
 transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
+.menu-item::before {
+  content: attr(data-title);
+  position: absolute;
+  height: 30px;
+  width: auto;
+  top: 20%;
+  right: 110%;
+  transform: translateX(-5%);
+  background-color: #2e295f;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: "Baskerville", serif;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  display: flex;
+  align-items: center; /* Vertical alignment */
+  justify-content: center; /* Horizontal alignment */
+  padding: 0 10px;
+}
+
+.menu-item:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
 .menu-item:hover {
 background-color: #2e295f;
 transform: scale(1.1);
@@ -220,7 +253,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   max-width: 1400px; /* Increased max-width */
-  width: 250%; /* Increased width */
+  width: 95%; /* Increased width */
   margin: 20px auto;
   overflow-y: auto;
   align-self: center;
@@ -260,16 +293,15 @@ h3 {
   padding: 5px;
   margin: 10px 0 0;
   text-align: left;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 h4 {
   border-radius: 2px;
-  padding: 15px;
+  padding: 30px;
   margin: 10px 0 0 10px;
   text-align: center;
-  font-size: 20px;
-  color: #4a2a80;
+  font-size: 30px;
 }
 
 p,
