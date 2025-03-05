@@ -79,11 +79,8 @@ export default {
 .content-container {
   display: flex;
   justify-content: center;
-  /* Center horizontally */
   flex-wrap: wrap;
-  /* Allow wrapping on smaller screens */
   width: 90%;
-  /* Adjust as needed */
   max-width: 1200px;
   margin-top: 20px;
   align-items: flex-start;
