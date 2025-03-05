@@ -30,13 +30,13 @@
 
     <div class="menu-container" :class="{ open: isMenuOpen }">
       <div class="menu-button" @click="toggleMenu"></div>
-        <div class="menu-items">
-          <router-link to="/" class="menu-item" data-title="Home">🏠</router-link>
-          <router-link to="/edu_exp" class="menu-item" data-title="Education & Experience">🎓</router-link>
-          <router-link to="/interest" class="menu-item" data-title="Interests">❤️</router-link>
-          <router-link to="/gallery" class="menu-item" data-title="Gallery">🖼️</router-link>
-          <router-link to="/guestbook" class="menu-item" data-title="Guestbook">📝</router-link>
-        </div>
+      <div class="menu-items">
+        <router-link to="/" class="menu-item" data-title="Home">🏠</router-link>
+        <router-link to="/edu_exp" class="menu-item" data-title="Education & Experience">🎓</router-link>
+        <router-link to="/interest" class="menu-item" data-title="Interests">❤️</router-link>
+        <router-link to="/gallery" class="menu-item" data-title="Gallery">🖼️</router-link>
+        <router-link to="/guestbook" class="menu-item" data-title="Comment">📝</router-link>
+      </div>
     </div>
   </div>
 </template>

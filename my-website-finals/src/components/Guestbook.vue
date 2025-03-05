@@ -1,103 +1,85 @@
 <template>
   <div>
-    <h4>Guestbook</h4>
+    <h4>Comment</h4>
     <div class="content-container">
-      <div class="content-form">
-        <section id="comments-form">
-          <form @submit.prevent="submitEntry">
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input type="text" id="name" v-model="newEntry.name" required class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="message">Comments:</label>
-              <textarea id="message" v-model="newEntry.message" required class="form-control"></textarea>
-            </div>
-            <button type="submit" class="btn">Submit</button>
-          </form>
-        </section>
-      </div>
-
       <div class="content">
-        <section id="comments">
-          <div v-for="(entry, index) in entries" :key="index">
-            <strong>{{ entry.name }}:</strong><br />
-            {{ entry.message }} <br><br>
-          </div>
-        </section>
+        <form @submit.prevent="addMessage">
+          <input v-model="name" placeholder="Name" /><br>
+          <textarea v-model="message" placeholder="Message"></textarea>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
 
-    <div class="menu-container" :class="{ open: menuOpen }">
-      <div class="menu-button" @click="toggleMenu" :class="{ active: menuActive }"></div>
+    <div class="content-container">
+      <div class="content">
+        <h2>Comments</h2>
+        <p v-for="entry in guestbookEntries" :key="entry.id">
+          {{ entry.name }}: <br>
+          <tab>{{ entry.message }}</tab>
+          
+        </p>
+      </div>
+    </div>
+
+    <div class="menu-container" :class="{ open: isMenuOpen }">
+      <div class="menu-button" @click="toggleMenu"></div>
       <div class="menu-items">
         <router-link to="/" class="menu-item" data-title="Home">🏠</router-link>
         <router-link to="/edu_exp" class="menu-item" data-title="Education & Experience">🎓</router-link>
         <router-link to="/interest" class="menu-item" data-title="Interests">❤️</router-link>
         <router-link to="/gallery" class="menu-item" data-title="Gallery">🖼️</router-link>
-        <router-link to="/guestbook" class="menu-item" data-title="Guestbook">📝</router-link>
-      </div>
-    </div>
-
-    <div id="successModal" class="modal" :style="{ display: showModal ? 'block' : 'none' }">
-      <div class="modal-content">
-        <p>Message successfully submitted!</p>
-        <button @click="closeModal" class="btn">Close</button>
+        <router-link to="/guestbook" class="menu-item" data-title="Comment">📝</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-import { supabase } from '../lib/supabaseClient';
+import { ref, onMounted } from 'vue';
+import { supabase } from '../lib/supabaseClient'; // Corrected import path
 
 export default {
-  data() {
-    return {
-      newEntry: { name: '', message: '' },
-      entries: [],
-      menuOpen: false,
-      menuActive: false,
-      showModal: false,
+  setup() {
+    const name = ref('');
+    const message = ref('');
+    const guestbookEntries = ref([]);
+    const isMenuOpen = ref(false);
+
+    const addMessage = async () => {
+      await supabase
+        .from('guestbook')
+        .insert([{ name: name.value, message: message.value }]);
+      name.value = '';
+      message.value = '';
+      fetchMessages();
     };
-  },
-  async mounted() {
-    await this.fetchEntries();
-  },
-  methods: {
-    async fetchEntries() {
-      const { data, error } = await supabase.from('guestbook').select('*');
-      if (error) {
-        console.error(error);
-      } else {
-        this.entries = data;
-      }
-    },
-    async submitEntry() {
-      const { error } = await supabase.from('guestbook').insert([this.newEntry]);
-      if (error) {
-        console.error(error);
-      } else {
-        this.newEntry = { name: '', message: '' };
-        await this.fetchEntries();
-        this.showModal = true;
-        setTimeout(() => {
-          this.closeModal();
-        }, 3000);
-      }
-    },
-    closeModal() {
-      this.showModal = false;
-    },
-    toggleMenu() {
-      this.menuOpen = !this.menuOpen;
-      this.menuActive = !this.menuActive;
-    },
+
+    const fetchMessages = async () => {
+      const { data } = await supabase
+        .from('guestbook')
+        .select('*')
+        .order('created_at', { ascending: false });
+      guestbookEntries.value = data;
+    };
+
+    onMounted(fetchMessages);
+
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
+    };
+
+    return {
+      name,
+      message,
+      guestbookEntries,
+      addMessage,
+      isMenuOpen,
+      toggleMenu,
+    };
   },
 };
 </script>
-
 
 
 
@@ -106,19 +88,18 @@ export default {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 90%;
-  max-width: 1200px;
-  margin-top: 20px;
+  width: 90%; /* Adjust as needed */
+  max-width: 1200px; /* Optional max-width */
+  margin: 20px auto;
 }
 
 .content {
   background: rgba(0, 0, 0, 0.5);
   padding: 30px;
   border-radius: 10px;
-  max-width: 1200vw;
-  width: 100%;
-  margin: 20px;
-  overflow-y: auto;
+  width: 70%; /* Increased width */
+  max-width: 800px; /* Optional max-width */
+  margin: 20px auto;
   box-sizing: border-box;
 }
 
@@ -126,11 +107,15 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   padding: 30px;
   border-radius: 10px;
-  max-width: 80vw;
+  height: auto;
   width: 60%;
   margin: 20px;
   overflow-y: auto;
   box-sizing: border-box;
+}
+
+.content:last-child {
+  width: 40vw; /* 2/5 of the screen width */
 }
 
 label {
@@ -143,7 +128,7 @@ label {
 input {
   width: 100%;
   padding: 10px;
-  margin-top: 5px 0 10px;
+  margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
@@ -151,9 +136,9 @@ input {
 
 textarea {
   width: 100%;
-  height: 300%;
+  height: 200px;
   padding: 10px;
-  margin-top: 5px 0 10px;
+  margin-top: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
@@ -325,7 +310,8 @@ p,
 .paragraph {
   font-size: 15px;
   text-align: justify;
-  margin: 30px;
+  margin: 10px;
+  margin-left: 30px;
   line-height: 1.5;
 }
 
