@@ -278,7 +278,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-attachment: fixed;
-  background-color: black; /* Fallback background color */
+  background-color: black; 
 }
 
 </style>
